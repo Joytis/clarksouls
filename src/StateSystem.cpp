@@ -10,53 +10,66 @@ StateSystem::StateSystem() {
 
 }
 
-void StateSystem::AddState(std::string key, IState *value) {
-    if (!(m_stateMap.find(key) == m_stateMap.end())) {
+void StateSystem::AddState(std::string key, IState *value)
+{
+    if (!(m_stateMap.find(key) == m_stateMap.end()))
+    {
         // State already exists. return false
-        throw e_stateExists;
+        throw new e_state_exists;
     }
-    else{
+    else
+    {
         m_stateMap[key] = value;
     }
 }
 
-void  StateSystem::PushState(std::string key) {
-    if (m_stateStack.empty()) {
-        // State Stack is empty. Return false scrub!
-        throw e_emptyStack;
+void  StateSystem::PushState(std::string key)
+{
+    if (m_stateMap.find(key) == m_stateMap.end())
+    {
+        throw new e_state_dne;
     }
-    else if (m_stateMap[key] == nullptr) {
-        throw e_stateDNE;
-    }
-    else{
+    else
+    {
         m_stateStack.push(m_stateMap[key]);
     }
 }
 
-void StateSystem::PopState() {
-    if(!m_stateStack.empty()){
+void StateSystem::PopState()
+{
+    if(!m_stateStack.empty())
+    {
         m_stateStack.pop();
     }
-    else{
+    else
+    {
         // State stack is empty.
-        throw e_emptyStack;
+        throw new e_empty_stack;
     }
 }
 
-void StateSystem::update(sf::Time deltaTime, Input *input) {
-    if(m_stateStack.empty()){
-        throw e_emptyStack;
+void StateSystem::update(sf::Time deltaTime, Input *input)
+{
+    if(m_stateStack.empty())
+    {
+        // Stack is empty!
+        throw new e_empty_stack;
     }
-    else{
+    else
+    {
         m_stateStack.top()->update(deltaTime, input);
     }
 }
 
-void StateSystem::render(sf::RenderWindow *window) {
-    if(m_stateStack.empty()){
-        throw e_emptyStack;
+void StateSystem::render(sf::RenderWindow *window)
+{
+    if(m_stateStack.empty())
+    {
+        //Stack is empty!
+        throw new e_empty_stack;
     }
-    else{
+    else
+    {
         m_stateStack.top()->render(window);
     }
 

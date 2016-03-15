@@ -13,7 +13,7 @@
 //      - Add pointers to initialized states to the map. Should be associated to a string
 //      - Push states from map onto stack. update/render will be read from the states on stack
 //      - Pop states off the stack to pull out of scope/push some on.
-//      
+//
 
 // Methods in class throw e_stateSystemException(s)
 class StateSystem {

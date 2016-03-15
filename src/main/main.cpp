@@ -39,11 +39,17 @@
 //      - Stay cool B)
 
 
-#include "includes.hpp"
+#include "../Includes.hpp"
+
+#include "../StateSystem.hpp"
+#include "../game_states/CharTestState.hpp"
+#include "../game_states/MainMenuState.hpp"
 
 int main() {
 
+    //-------------------
     // Create our window
+    //-------------------
     sf::RenderWindow *window = new sf::RenderWindow(sf::VideoMode(1152, 648), "ClarkSouls");
 
     // Set the Icon
@@ -55,6 +61,31 @@ int main() {
     window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
      */
 
+
+    //------------------------------
+    // Initialize our state system!
+    //------------------------------
+    StateSystem* stateSystem = new StateSystem();
+
+    // Wow! Look at all these states!
+    stateSystem->AddState("charTest", new CharTestState(stateSystem));
+    stateSystem->AddState("testTest", new MainMenuState(stateSystem));
+
+
+    //------------------------
+    // Initialize our Input!
+    //------------------------
+    Input* input = new Input();
+
+
+    //---------------------------
+    // Initialize our Game Clock!
+    //---------------------------
+    sf::Clock gameClock;
+
+    //---------------
+    // Game Loops!
+    //---------------
     while(window->isOpen())
     {
 
@@ -84,6 +115,24 @@ int main() {
                     window->close();
                 }
             }
+        }
+
+        // DO INPUT HANDLING HERE
+
+        {
+            //---------------------
+            // UPDATE AND RENDER
+            //---------------------
+
+            // Clear screen
+            window->clear();
+
+            // Render Current GameState;
+            stateSystem->update(gameClock.restart(), input);
+            stateSystem->render(window);
+
+            // Update the window
+            window->display();
         }
     }
 
