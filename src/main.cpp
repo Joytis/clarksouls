@@ -34,6 +34,10 @@
 //
 //     - Cool Guy: B)
 
+// TODO(clark):
+//      - Implement event-based error checking
+//      - Stay cool B)
+
 
 #include "includes.hpp"
 

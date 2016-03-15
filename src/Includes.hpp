@@ -11,6 +11,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 
+#include <exception>
 #include <iostream>
 #include <list>
 #include <map>
@@ -20,7 +21,6 @@
 #include <thread>
 #include <vector>
 
-
-
+#include "Input.hpp"
 
 #endif //CLANDREWSOULS_INCLUDES_HPP

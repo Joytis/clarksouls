@@ -7,7 +7,15 @@
 
 #include "Includes.hpp"
 #include "IState.hpp"
+#include "exceptions/StateSystemExceptions.hpp"
 
+// State System! Basic usage!
+//      - Add pointers to initialized states to the map. Should be associated to a string
+//      - Push states from map onto stack. update/render will be read from the states on stack
+//      - Pop states off the stack to pull out of scope/push some on.
+//      
+
+// Methods in class throw e_stateSystemException(s)
 class StateSystem {
 private:
 
@@ -25,25 +33,38 @@ public:
     StateSystem();
     ~StateSystem();
 
+
     // Adds a state to m_stateMap
-    bool AddState();
+    // Excaptions:
+    //      e_stateExists - State already exists in the m_stateMap
+    void AddState(std::string key, IState *value);
+
 
     // Pushes a state onto the stack. MAKE SURE TO POP PREVIOUS STATE
     //                                  - Assuming you just want one
-    bool PushState();
+    // Exceptions:
+    //      e_stateDNE - State does not exists in the m_stateMap.
+    void PushState(std::string key);
+
 
     // Pops the top state off the stack
-    bool PopState();
+    // Excemptions:
+    //      e_emptyStack - throws when. Stack. Is empty. Durrr.
+    void PopState();
 
 
     // TODO(clark): Implement multiple state updates
     // Calls update function for state on top of stack
+    // Exceptions:
+    //      e_emptyStack - throws WHEN STACK IS EMPTY DUR.
     void update(sf::Time deltaTime, Input *input);
+
 
     // TODO(clark): Implement multiple state rendering
     // Calls render function for state on top of the stack
+    // Exceptions:
+    //      e_emptyStack - throws When STACK. IS EMPTYYYYY WOOOO!!!
     void render(sf::RenderWindow *window);
-
 };
 
 
