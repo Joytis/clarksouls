@@ -38,11 +38,11 @@ public:
 
     // TODO(clark): Implement multiple state updates
     // Calls update function for state on top of stack
-    void update();
+    void update(sf::Time deltaTime, Input *input);
 
     // TODO(clark): Implement multiple state rendering
     // Calls render function for state on top of the stack
-    void render();
+    void render(sf::RenderWindow *window);
 
 };
 

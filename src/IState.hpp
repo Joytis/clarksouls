@@ -11,7 +11,7 @@ class IState{
 public:
     virtual ~IState(){};
     virtual void handle_input() = 0;
-    virtual void update(sf::Time deltaTime) = 0;
+    virtual void update(sf::Time deltaTime, Input *input) = 0;
     virtual void render(sf::RenderWindow *window) = 0;
 };
 
