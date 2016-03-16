@@ -13,7 +13,7 @@ CharTestState::CharTestState(StateSystem* system) {
         //ERROR HANDLING HERE
     }
     tesprite.setTexture(testure);
-    tesprite.setPosition(500.0f, 500.0f);
+    tesprite.setPosition(425.0f, 170.0f);
 }
 
 void CharTestState::update(sf::Time deltaTime, Input *input) {

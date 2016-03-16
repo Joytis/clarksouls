@@ -71,6 +71,8 @@ int main() {
     stateSystem->AddState("charTest", new CharTestState(stateSystem));
     stateSystem->AddState("testTest", new MainMenuState(stateSystem));
 
+    stateSystem->PushState("charTest");
+
 
     //------------------------
     // Initialize our Input!
