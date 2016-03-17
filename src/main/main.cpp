@@ -86,7 +86,7 @@ int main() {
         stateSystem->PushState("inputTest");
     }
     catch (const state_system_exception& e) {
-        std::cerr << e.what() << std::endl;
+        DEBUG_ERROR(e.what());
     }
 
 
@@ -143,17 +143,16 @@ int main() {
 
             try {
                 // Render Current GameState;
-                stateSystem->update(gameClock.restart(), input);
+                stateSystem->update(gameClock.restart().asSeconds(), input);
                 stateSystem->render(window);
             }
             catch(const state_system_exception& e){
-                std::cerr << e.what() << std::endl;
+                DEBUG_ERROR(e.what());
                 window->close();
             }
             // Update the window
             window->display();
         }
     }
-
     return EXIT_SUCCESS;
 }

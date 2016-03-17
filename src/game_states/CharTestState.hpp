@@ -17,7 +17,11 @@ private:
     sf::Sprite  tesprite;
 public:
     CharTestState(StateSystem* system);
-    void update(sf::Time deltaTime, Input* input);
+
+    virtual void begin();
+    virtual void end();
+
+    void update(float deltaTime, Input* input);
     void render(sf::RenderWindow* window);
 };
 

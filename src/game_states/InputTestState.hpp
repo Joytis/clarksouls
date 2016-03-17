@@ -9,7 +9,7 @@
 
 class InputTestState : public IState {
 private:
-    StateSystem* stateSystem;
+    StateSystem* m_stateSystem;
 
     sf::Font m_testFont;
     sf::Text m_testTexts[60];
@@ -20,7 +20,10 @@ public:
 
     InputTestState(StateSystem* system);
 
-    virtual void update(sf::Time deltaTime, Input* inupt);
+    virtual void begin();
+    virtual void end();
+
+    virtual void update(float deltaTime, Input* inupt);
     virtual void render(sf::RenderWindow* window);
 };
 

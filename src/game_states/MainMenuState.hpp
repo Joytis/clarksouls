@@ -13,7 +13,10 @@ private:
 public:
     MainMenuState(StateSystem* system);
 
-    virtual void update(sf::Time deltaTime, Input *input);
+    virtual void begin();
+    virtual void end();
+
+    virtual void update(float deltaTime, Input *input);
     virtual void render(sf::RenderWindow* window);
 };
 

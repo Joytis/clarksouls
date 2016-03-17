@@ -34,9 +34,16 @@
 // Debug Macros
 //-----------------------------
 #ifdef DEBUG
-#define DEBUG_STRING(str) (printf(str))
+// Basic debug string
+#define DEBUG_STRING(str) (printf(str + "\n"))
+#define DEBUG_ERROR(str) (std::cerr << str << std::endl)
+
 #else
+
 #define DEBUG_STRING(str)
+#define DEBUG_ERROR(str)
+
 #endif //DEBUG
+
 
 #endif //CLANDREWSOULS_INCLUDES_HPP

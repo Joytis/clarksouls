@@ -10,6 +10,9 @@ StateSystem::StateSystem() {
 
 }
 
+//--------------------------------
+// ADD STATE!
+//--------------------------------
 void StateSystem::AddState(std::string key, IState *value)
 {
     if (!(m_stateMap.find(key) == m_stateMap.end()))
@@ -23,22 +26,30 @@ void StateSystem::AddState(std::string key, IState *value)
     }
 }
 
+//--------------------------------
+// PUSH STATE!
+//--------------------------------
 void  StateSystem::PushState(std::string key)
 {
-    if (m_stateMap.find(key) == m_stateMap.end())
+    if (!(m_stateMap.find(key) == m_stateMap.end()))
     {
-        throw e_state_dne();
+        m_stateStack.push(m_stateMap[key]);
+        m_stateStack.top()->begin();
     }
     else
     {
-        m_stateStack.push(m_stateMap[key]);
+        throw e_state_dne();
     }
 }
 
+//--------------------------------
+// POP STATE!
+//--------------------------------
 void StateSystem::PopState()
 {
     if(!m_stateStack.empty())
     {
+        m_stateStack.top()->end();
         m_stateStack.pop();
     }
     else
@@ -48,7 +59,10 @@ void StateSystem::PopState()
     }
 }
 
-void StateSystem::update(sf::Time deltaTime, Input *input)
+//--------------------------------
+// UPDATE!
+//--------------------------------
+void StateSystem::update(float deltaTime, Input *input)
 {
     if(m_stateStack.empty())
     {
@@ -61,6 +75,9 @@ void StateSystem::update(sf::Time deltaTime, Input *input)
     }
 }
 
+//--------------------------------
+// RENDER!
+//--------------------------------
 void StateSystem::render(sf::RenderWindow *window)
 {
     if(m_stateStack.empty())

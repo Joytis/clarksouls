@@ -6,7 +6,7 @@
 #include "../Input.hpp"
 
 InputTestState::InputTestState(StateSystem* system) {
-    stateSystem = system;
+    m_stateSystem = system;
 
     if(!m_testFont.loadFromFile("src/assets/sansation.ttf")){
         //TODO(clark): ERROR CHECKING!
@@ -20,11 +20,35 @@ InputTestState::InputTestState(StateSystem* system) {
     }
 }
 
-void InputTestState::update(sf::Time deltaTime, Input* input) {
+
+void InputTestState::begin() {
+
+}
+
+
+void InputTestState::end() {
+
+}
+
+
+void InputTestState::update(float deltaTime, Input* input) {
+    //-------------------------------
+    // Handle Input
+    //-------------------------------
+    if (input->m_keyboardInput.Space.IsPressed){
+        m_stateSystem->PopState();
+        m_stateSystem->PushState("charTest");
+    }
+
+
+    //-------------------------------
+    // Update Logic Stuff
+    //-------------------------------
     for( int i = 0; i < ARRAY_SIZE(m_testTexts); i++ ){
         m_testTexts[i].setString(getStringThing(input->m_keyboardInput.Buttons[i]));
     }
 }
+
 
 void InputTestState::render(sf::RenderWindow *window) {
     // RENDER
@@ -43,9 +67,7 @@ std::string InputTestState::getStringThing(game_button_state state) {
     tmp.append( (state.IsPressed) ? "1 " : "0 " );
     tmp.append( (state.WasDown) ? "1" : "0" );
 
-    if(state.IsPressed){
-        std::cerr << "Value!" << std::endl;
-    }
-
     return tmp;
 }
+
+

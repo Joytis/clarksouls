@@ -40,14 +40,14 @@ public:
     void AddState(std::string key, IState *value);
 
 
-    // Pushes a state onto the stack. MAKE SURE TO POP PREVIOUS STATE
+    // Pushes a state onto the stack and calls begin(). MAKE SURE TO POP PREVIOUS STATE
     //                                  - Assuming you just want one
     // Exceptions:
     //      e_stateDNE - State does not exists in the m_stateMap.
     void PushState(std::string key);
 
 
-    // Pops the top state off the stack
+    // Pops the top state off the stack and calls its end() function.
     // Excemptions:
     //      e_emptyStack - throws when. Stack. Is empty. Durrr.
     void PopState();
@@ -57,7 +57,7 @@ public:
     // Calls update function for state on top of stack
     // Exceptions:
     //      e_emptyStack - throws WHEN STACK IS EMPTY DUR.
-    void update(sf::Time deltaTime, Input *input);
+    void update(float deltaTime, Input *input);
 
 
     // TODO(clark): Implement multiple state rendering
