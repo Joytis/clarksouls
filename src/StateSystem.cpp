@@ -15,7 +15,7 @@ void StateSystem::AddState(std::string key, IState *value)
     if (!(m_stateMap.find(key) == m_stateMap.end()))
     {
         // State already exists. return false
-        throw new e_state_exists;
+        throw e_state_exists();
     }
     else
     {
@@ -27,7 +27,7 @@ void  StateSystem::PushState(std::string key)
 {
     if (m_stateMap.find(key) == m_stateMap.end())
     {
-        throw new e_state_dne;
+        throw e_state_dne();
     }
     else
     {
@@ -44,7 +44,7 @@ void StateSystem::PopState()
     else
     {
         // State stack is empty.
-        throw new e_empty_stack;
+        throw e_empty_stack();
     }
 }
 
@@ -53,7 +53,7 @@ void StateSystem::update(sf::Time deltaTime, Input *input)
     if(m_stateStack.empty())
     {
         // Stack is empty!
-        throw new e_empty_stack;
+        throw e_empty_stack();
     }
     else
     {
@@ -66,7 +66,7 @@ void StateSystem::render(sf::RenderWindow *window)
     if(m_stateStack.empty())
     {
         //Stack is empty!
-        throw new e_empty_stack;
+        throw e_empty_stack();
     }
     else
     {

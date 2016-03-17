@@ -11,10 +11,12 @@
       <sourceFolder url="file://$MODULE_DIR$/src/StateSystem.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Input.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/main.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/game_states/CharTestState.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/game_states/MainMenuState.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/game_states/InputTestState.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/game_states/MainMenuState.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/game_states/CharTestState.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/game_states/MainMenuState.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/game_states/CharTestState.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/game_states/InputTestState.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/cmake_modules/FindSFML.cmake" isTestSource="false" />
     </content>

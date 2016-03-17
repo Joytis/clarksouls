@@ -23,4 +23,20 @@
 
 #include "Input.hpp"
 
+#define ARRAY_SIZE(array) (sizeof(array)/sizeof(array[0]))
+
+//-----------------------------
+// Jank-ass Toggle!
+//-----------------------------
+#define DEBUG
+
+//-----------------------------
+// Debug Macros
+//-----------------------------
+#ifdef DEBUG
+#define DEBUG_STRING(str) (printf(str))
+#else
+#define DEBUG_STRING(str)
+#endif //DEBUG
+
 #endif //CLANDREWSOULS_INCLUDES_HPP

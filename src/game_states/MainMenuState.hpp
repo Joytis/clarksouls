@@ -12,6 +12,7 @@ private:
     StateSystem* m_stateSystem;
 public:
     MainMenuState(StateSystem* system);
+
     virtual void update(sf::Time deltaTime, Input *input);
     virtual void render(sf::RenderWindow* window);
 };

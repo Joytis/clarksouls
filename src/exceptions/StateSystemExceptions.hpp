@@ -7,7 +7,7 @@
 
 #include <exception>
 
-class state_system_exception : public std::exception{
+struct state_system_exception : public std::exception{
     virtual const char* what() const throw()
     {
         return "State System Error!";
@@ -15,7 +15,7 @@ class state_system_exception : public std::exception{
 };
 
 //Throw this when State stack is empty
-class e_empty_stack : public state_system_exception {
+struct e_empty_stack : public state_system_exception {
     virtual const char* what() const throw()
     {
         return "State System is Empty!";
@@ -24,14 +24,14 @@ class e_empty_stack : public state_system_exception {
 
 
 // Throw this exception when state does not exist in the system
-class e_state_dne : public state_system_exception {
+struct e_state_dne : public state_system_exception {
     virtual const char* what() const throw()
     {
         return "State does now exist in this sytem";
     }
 };
 
-class e_state_exists : public state_system_exception {
+struct e_state_exists : public state_system_exception {
     virtual const char* what() const throw() {
         return "State already exists!";
     }

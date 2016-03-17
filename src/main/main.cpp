@@ -44,6 +44,7 @@
 #include "../StateSystem.hpp"
 #include "../game_states/CharTestState.hpp"
 #include "../game_states/MainMenuState.hpp"
+#include "../game_states/InputTestState.hpp"
 
 int main() {
 
@@ -67,17 +68,27 @@ int main() {
     //------------------------------
     StateSystem* stateSystem = new StateSystem();
 
-    // Wow! Look at all these states!
-    stateSystem->AddState("charTest", new CharTestState(stateSystem));
-    stateSystem->AddState("testTest", new MainMenuState(stateSystem));
-
-    stateSystem->PushState("charTest");
-
-
     //------------------------
     // Initialize our Input!
     //------------------------
     Input* input = new Input();
+
+    // Wow! Look at all these states!
+
+    try {
+        stateSystem->AddState("charTest", new CharTestState(stateSystem));
+        stateSystem->AddState("testTest", new MainMenuState(stateSystem));
+        stateSystem->AddState("inputTest", new InputTestState(stateSystem));
+
+        //-------------------------------------------------------------------
+        // Change this if you want to change the state the system starts in!
+        //-------------------------------------------------------------------
+        stateSystem->PushState("inputTest");
+    }
+    catch (const state_system_exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
+
 
 
     //---------------------------
@@ -120,6 +131,7 @@ int main() {
         }
 
         // DO INPUT HANDLING HERE
+        input->UpdateInput();
 
         {
             //---------------------
@@ -129,10 +141,15 @@ int main() {
             // Clear screen
             window->clear();
 
-            // Render Current GameState;
-            stateSystem->update(gameClock.restart(), input);
-            stateSystem->render(window);
-
+            try {
+                // Render Current GameState;
+                stateSystem->update(gameClock.restart(), input);
+                stateSystem->render(window);
+            }
+            catch(const state_system_exception& e){
+                std::cerr << e.what() << std::endl;
+                window->close();
+            }
             // Update the window
             window->display();
         }
