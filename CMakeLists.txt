@@ -18,7 +18,10 @@ add_executable (clarksouls ${clarksouls_SOURCES})
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")
-find_package(SFML REQUIRED system window graphics network audio)
+
+set(${SFML_ROOT} "D:/dev/SFML-2.3.2_64")
+
+find_package(SFML 2 REQUIRED graphics window network audio system )
 if(SFML_FOUND)
     include_directories(${SFML_INCLUDE_DIR})
     target_link_libraries(clarksouls ${SFML_LIBRARIES})
