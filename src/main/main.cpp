@@ -70,6 +70,7 @@ int main() {
     // Add fonts to the font manager!
     try {
         fontManager->AddFont("sansation", new sf::Font);
+
         //TODO(clark): find a better way to do this. It looks kind of ugly and inefficient.
         if(!fontManager->GetFont("sansation")->loadFromFile("./src/assets/sansation.ttf")) {
             throw new e_manager_obj_cantload;
