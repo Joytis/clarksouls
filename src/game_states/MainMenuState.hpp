@@ -7,17 +7,26 @@
 
 #include "StateIncludes.hpp"
 
+struct MenuElement {
+    sf::Sprite sprite;
+};
+
 class MainMenuState : public IState {
 private:
-    StateSystem* m_stateSystem;
+    StateSystem *m_stateSystem;
+    TextureManager *m_textureManager;
+
+
 public:
-    MainMenuState(StateSystem* system);
+    MainMenuState(StateSystem* system, TextureManager *texman);
 
     virtual void begin();
+
     virtual void end();
 
     virtual void update(float deltaTime, Input *input);
-    virtual void render(sf::RenderWindow* window);
+
+    virtual void render(sf::RenderWindow *window);
 };
 
 

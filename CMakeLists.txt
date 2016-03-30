@@ -13,7 +13,17 @@ list(REMOVE_DUPLICATES clarksouls_INCLUDE_DIRS)
 
 include_directories(${clarksouls_INCLUDE_DIRS})
 
-add_executable (clarksouls ${clarksouls_SOURCES})
+
+
+add_executable (clarksouls ${clarksouls_SOURCES}
+
+        src/Includes.hpp
+        src/game_states/StateIncludes.hpp
+
+        src/exceptions/StateSystemExceptions.hpp
+        src/exceptions/ManagerExceptions.hpp)
+
+
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 

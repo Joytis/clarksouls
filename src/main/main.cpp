@@ -55,30 +55,74 @@ int main() {
 
     // Set the Icon
     /*
-    sf::Image icon;
-    if (!icon.loadFromFile("src/assets/icon.png")) {
-        return EXIT_FAILURE;
-    }
-    window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+        sf::Image icon;
+        if (!icon.loadFromFile("src/assets/icon.png")) {
+            return EXIT_FAILURE;
+        }
+        window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
      */
 
+    //------------------------------
+    // Initialize our Font Manager!
+    //------------------------------
+    FontManager *fontManager = new FontManager();
+
+    // Add fonts to the font manager!
+    try {
+        fontManager->AddFont("sansation", new sf::Font);
+        //TODO(clark): find a better way to do this. It looks kind of ugly and inefficient.
+        if(!fontManager->GetFont("sansation")->loadFromFile("./src/assets/sansation.ttf")) {
+            throw new e_manager_obj_cantload;
+        }
+
+    }
+    catch (const manager_exception & e) {
+        DEBUG_ERROR(e.what());
+
+        // TODO(clark): For now, let's just close the window. but handle later.
+        window->close();
+    }
+
+
+    //------------------------------
+    // Initialize our tex Manager!
+    //------------------------------
+    TextureManager *textureManager = new TextureManager();
+
+    // Add textures to the texture Manager!
+    try {
+        //---------------------------
+        // Cute Bird!
+        //--------------------------
+        textureManager->AddTexture("cuteBird", new sf::Texture);
+
+        //TODO(clark): find a better way to do this. It looks kind of ugly and inefficient.
+        if(!textureManager->GetTexture("cuteBird")->loadFromFile("./src/assets/cute_bird.png")) {
+            throw new e_manager_obj_cantload;
+        }
+
+        //
+
+        //
+    }
+    catch (const manager_exception & e) {
+        DEBUG_ERROR(e.what());
+
+        // TODO(clark): For now, let's just close the window. but handle later.
+        window->close();
+    }
 
     //------------------------------
     // Initialize our state system!
     //------------------------------
     StateSystem* stateSystem = new StateSystem();
 
-    //------------------------
-    // Initialize our Input!
-    //------------------------
-    Input* input = new Input();
-
     // Wow! Look at all these states!
 
     try {
-        stateSystem->AddState("charTest", new CharTestState(stateSystem));
-        stateSystem->AddState("testTest", new MainMenuState(stateSystem));
-        stateSystem->AddState("inputTest", new InputTestState(stateSystem));
+        stateSystem->AddState("charTest", new CharTestState(stateSystem, textureManager));
+        stateSystem->AddState("testTest", new MainMenuState(stateSystem, textureManager));
+        stateSystem->AddState("inputTest", new InputTestState(stateSystem, fontManager));
 
         //-------------------------------------------------------------------
         // Change this if you want to change the state the system starts in!
@@ -87,8 +131,21 @@ int main() {
     }
     catch (const state_system_exception& e) {
         DEBUG_ERROR(e.what());
+
+        // TODO(clark): For now, let's just close the window. but handle later.
+        window->close();
+    }
+    catch (const manager_exception & e) {
+        DEBUG_ERROR(e.what());
+
+        //TODO(clark): Again, for now, just close the window.
+        window->close();
     }
 
+    //------------------------
+    // Initialize our Input!
+    //------------------------
+    Input* input = new Input();
 
 
     //---------------------------
@@ -111,11 +168,14 @@ int main() {
         sf::Event event;
         while(window->pollEvent(event))
         {
+            // Window Closed Event
             if(event.type == sf::Event::Closed)
             {
                 window->close();
             }
 
+
+            // Checking for escape keys
             if(event.type == sf::Event::KeyPressed)
             {
                 if(event.key.code == sf::Keyboard::Escape)
@@ -126,6 +186,22 @@ int main() {
                 if(event.key.code == sf::Keyboard::F4)
                 {
                     window->close();
+                }
+            }
+
+            // Check if Controller should be used.
+            if(!input->IsJoystickActive())
+            {
+                if(event.type == sf::Event::JoystickButtonPressed)
+                {
+                    input->ToggleJoyActive();
+                }
+            }
+            else
+            {
+                if(event.type == sf::Event::KeyPressed)
+                {
+                    input->ToggleJoyActive();
                 }
             }
         }
@@ -146,7 +222,7 @@ int main() {
                 stateSystem->update(gameClock.restart().asSeconds(), input);
                 stateSystem->render(window);
             }
-            catch(const state_system_exception& e){
+            catch(const state_system_exception& e) {
                 DEBUG_ERROR(e.what());
                 window->close();
             }

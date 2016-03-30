@@ -5,9 +5,10 @@
 #include "MainMenuState.hpp"
 
 
-MainMenuState::MainMenuState(StateSystem* system)
+MainMenuState::MainMenuState(StateSystem *system, TextureManager *texman)
 {
     m_stateSystem = system;
+    m_textureManager = texman;
 }
 
 
@@ -19,14 +20,10 @@ void MainMenuState::end() {
 
 }
 
-
-void MainMenuState::update(float deltaTime, Input *input)
-{
+void MainMenuState::update(float deltaTime, Input *input) {
 
 }
 
-void MainMenuState::render(sf::RenderWindow *window)
-{
+void MainMenuState::render(sf::RenderWindow *window) {
 
 }
-

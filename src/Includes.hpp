@@ -22,6 +22,13 @@
 #include <vector>
 
 #include "Input.hpp"
+#include "StateSystem.hpp"
+#include "TextureManager.hpp"
+#include "FontManager.hpp"
+
+// Exceptions!
+#include "exceptions/StateSystemExceptions.hpp"
+#include "exceptions/ManagerExceptions.hpp"
 
 #define ARRAY_SIZE(array) (sizeof(array)/sizeof(array[0]))
 
@@ -35,7 +42,7 @@
 //-----------------------------
 #ifdef DEBUG
 // Basic debug string
-#define DEBUG_STRING(str) (printf(str + "\n"))
+#define DEBUG_STRING(str) (printf(str))
 #define DEBUG_ERROR(str) (std::cerr << str << std::endl)
 
 #else

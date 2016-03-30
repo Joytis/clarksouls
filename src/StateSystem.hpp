@@ -5,9 +5,12 @@
 #ifndef CLARKSOULS_STATESYSTEM_HPP
 #define CLARKSOULS_STATESYSTEM_HPP
 
-#include "Includes.hpp"
+// TODO(clark): Another forward decleration because I suck at programming.
+class IState;
+
 #include "IState.hpp"
-#include "exceptions/StateSystemExceptions.hpp"
+#include "Includes.hpp"
+
 
 // State System! Basic usage!
 //      - Add pointers to initialized states to the map. Should be associated to a string

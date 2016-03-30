@@ -5,15 +5,12 @@
 #include "InputTestState.hpp"
 #include "../Input.hpp"
 
-InputTestState::InputTestState(StateSystem* system) {
+InputTestState::InputTestState(StateSystem* system, FontManager *fontman) {
     m_stateSystem = system;
-
-    if(!m_testFont.loadFromFile("src/assets/sansation.ttf")){
-        //TODO(clark): ERROR CHECKING!
-    }
+    m_fontManager = fontman;
 
     for(int i = 0; i < ARRAY_SIZE(m_testTexts); i++){
-        m_testTexts[i].setFont(m_testFont);
+        m_testTexts[i].setFont(*fontman->GetFont("sansation"));
         m_testTexts[i].setString("0 0 0");
         m_testTexts[i].setPosition( ((i % 10) * 80) * 1.0f, ((i / 10) * 80) * 1.0f );
         m_testTexts[i].setCharacterSize(25);
@@ -22,13 +19,14 @@ InputTestState::InputTestState(StateSystem* system) {
 
 
 void InputTestState::begin() {
-
+    DEBUG_STRING("InputTestState begin()\n");
 }
 
 
 void InputTestState::end() {
-
+    DEBUG_STRING("InputTestState end()\n");
 }
+
 
 
 void InputTestState::update(float deltaTime, Input* input) {

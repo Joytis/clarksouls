@@ -12,11 +12,11 @@
 class CharTestState : public IState {
 private:
     StateSystem* m_stateSystem;
+    TextureManager *m_textureManager;
 
-    sf::Texture testure;
     sf::Sprite  tesprite;
 public:
-    CharTestState(StateSystem* system);
+    CharTestState(StateSystem* system, TextureManager *texman);
 
     virtual void begin();
     virtual void end();

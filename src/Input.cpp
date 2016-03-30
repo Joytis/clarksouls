@@ -5,6 +5,10 @@
 #include "Input.hpp"
 
 Input::Input(){
+
+    //Start using Keyboard input
+    m_joystickActive = false;
+
     for(int i = 0; i < ARRAY_SIZE(m_controllerInput.Buttons); i++){
         m_controllerInput.Buttons[i].IsDown = false;
         m_controllerInput.Buttons[i].IsPressed = false;
@@ -102,9 +106,30 @@ void Input::updateKeyboardButtonState(sf::Keyboard::Key key, game_button_state& 
     state.WasDown = state.IsDown;
 }
 
+
 void Input::UpdateInput(){
+    if(m_joystickActive){
+        UpdateControllerInput();
+    } else {
+        UpdateKeyboardInput();
+    }
+}
+
+void Input::UpdateKeyboardInput(){
     for(int i = 0; i < ARRAY_SIZE(m_key); i++){
         updateKeyboardButtonState(m_key[i], m_keyboardInput.Buttons[i]);
     }
+}
+
+void Input::UpdateControllerInput() {
+
+}
+
+bool Input::IsJoystickActive() {
+    return m_joystickActive;
+}
+
+void Input::ToggleJoyActive(){
+    m_joystickActive = !m_joystickActive;
 }
 

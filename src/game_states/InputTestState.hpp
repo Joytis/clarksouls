@@ -9,16 +9,16 @@
 
 class InputTestState : public IState {
 private:
-    StateSystem* m_stateSystem;
+    StateSystem *m_stateSystem;
+    FontManager *m_fontManager;
 
-    sf::Font m_testFont;
     sf::Text m_testTexts[60];
 
     std::string getStringThing(game_button_state state);
 
 public:
 
-    InputTestState(StateSystem* system);
+    InputTestState(StateSystem* system, FontManager *fontman);
 
     virtual void begin();
     virtual void end();

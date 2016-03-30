@@ -5,30 +5,30 @@
 #include "CharTestState.hpp"
 #include "../Input.hpp"
 
-CharTestState::CharTestState(StateSystem* system) {
+CharTestState::CharTestState(StateSystem* system, TextureManager *texman) {
     // Has its state system as member function
     m_stateSystem = system;
+    m_textureManager = texman;
 
-
-    if(!testure.loadFromFile("src/assets/cute_bird.png")){
-        //ERROR HANDLING HERE
-    }
-    tesprite.setTexture(testure);
+    // Get and dereference pointer to the texture.
+    tesprite.setTexture(*texman->GetTexture("cuteBird"));
     tesprite.setPosition(425.0f, 170.0f);
 }
 
 
 void CharTestState::begin() {
-
+    DEBUG_STRING("CharTestState begin() \n");
 }
 
 
 void CharTestState::end() {
-
+    DEBUG_STRING("CharTestState end()\n");
 }
 
 
 void CharTestState::update(float deltaTime, Input *input) {
+    float velocity = 200.0f * deltaTime;
+
     //-------------------------------
     // Handle Input
     //-------------------------------
@@ -41,17 +41,17 @@ void CharTestState::update(float deltaTime, Input *input) {
     // Update Logic Stuff
     //-------------------------------
     // Update silly sprite!
-    if(input->m_controllerInput.Up.IsDown){
-        tesprite.move(0, -50.0f);
+    if(input->m_keyboardInput.Up.IsDown){
+        tesprite.move(0.0f, -velocity);
     }
-    if(input->m_controllerInput.Down.IsDown){
-        tesprite.move(0, 50.0f);
+    if(input->m_keyboardInput.Down.IsDown){
+        tesprite.move(0.0f, velocity);
     }
-    if(input->m_controllerInput.Left.IsDown){
-        tesprite.move(-50.0f, 0);
+    if(input->m_keyboardInput.Left.IsDown){
+        tesprite.move(-velocity, 0.0f);
     }
-    if(input->m_controllerInput.Right.IsDown){
-        tesprite.move(50.0f, 0);
+    if(input->m_keyboardInput.Right.IsDown){
+        tesprite.move(velocity, 0.0f);
     }
 }
 

@@ -5,6 +5,10 @@
 #ifndef CLARKSOULS_INPUT_HPP
 #define CLARKSOULS_INPUT_HPP
 
+// TODO(clark): figure out why I have to forward include.
+// Forward include. Compiler was giving me shit.
+class Input;
+
 #include "Includes.hpp"
 
 typedef struct {
@@ -123,6 +127,8 @@ private:
     //This just cleans up the code a bit. Array of keys for ez pz looping
     sf::Keyboard::Key m_key[60];
 
+    bool m_joystickActive;
+
     void updateControllerButtonState(int joystick, int button, game_button_state& state);
     void updateKeyboardButtonState(sf::Keyboard::Key key, game_button_state& state);
 
@@ -138,6 +144,12 @@ public:
 
     //Updates tha input to current values! Called every frame
     void UpdateInput();
+    void UpdateKeyboardInput();
+    void UpdateControllerInput();
+
+    bool IsJoystickActive();
+    void ToggleJoyActive();
+
 };
 
 
