@@ -42,6 +42,10 @@ public:
     //      e_stateExists - State already exists in the m_stateMap
     void AddState(std::string key, IState *value);
 
+    // Gets a state from the state map
+    // Exceptions:
+    //      e_state_dne - state doesn't exist
+    IState *GetState(std::string key);
 
     // Pushes a state onto the stack and calls begin(). MAKE SURE TO POP PREVIOUS STATE
     //                                  - Assuming you just want one

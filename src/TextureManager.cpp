@@ -11,28 +11,28 @@ TextureManager::TextureManager()
 
 void TextureManager::AddTexture(std::string id, sf::Texture *texture)
 {
-    if(m_textureMap.find(id) == m_textureMap.end()) {
-        m_textureMap[id] = texture;
-    } else {
-        throw new e_manager_obj_exists;
-    }
+    // Texture can't exist under ID
+    check(m_textureMap.find(id) == m_textureMap.end(), e_manager_obj_exists,
+            "Texture: %s, already exists!", id.data())
+
+    m_textureMap[id] = texture;
 }
 
 sf::Texture *TextureManager::GetTexture(std::string id)
 {
-    if(m_textureMap.find(id) != m_textureMap.end()) {
-        return m_textureMap[id];
-    } else {
-        throw new e_manager_obj_dne;
-    }
+    // Texture has to exist so we can get it
+    check(m_textureMap.find(id) != m_textureMap.end(), e_manager_obj_dne,
+            "Texture: %s, does not exist", id.data())
+
+    return m_textureMap[id];
 }
 
 void TextureManager::RemoveTexture(std::string id)
 {
-    if(m_textureMap.find(id) != m_textureMap.end()) {
-        m_textureMap.erase(id);
-    } else {
-        throw new e_manager_obj_dne;
-    }
+    // Texture must exist so we can remove it
+    check(m_textureMap.find(id) != m_textureMap.end(), e_manager_obj_dne,
+            "Texture: %s, does not exist", id.data())
+
+    m_textureMap.erase(id);
 }
 

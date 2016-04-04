@@ -38,10 +38,23 @@
 //      - Implement event-based error checking
 //      - Stay cool B)
 
+// NOTE(clark):
+// When you want to throw an exception, use the macros in dbg.hpp.
+// They tun in the form:
+//
+//      check(BOOLEAN EXPRESSION,
+//            EXCEPTION,
+//            MESSAGE<printf>)
+//
+// This will expand into an if statement that when false, throws
+//  an exception of the given type and prints a formatted error
+//  message.
+
+// NOTE(clark): Check allocations with check_mem(POINTERVALUE)
+// NOTE(clark): Leave debug messages with log_info(MESSAGE<printf>)
 
 #include "../Includes.hpp"
 
-#include "../StateSystem.hpp"
 #include "../game_states/CharTestState.hpp"
 #include "../game_states/MainMenuState.hpp"
 #include "../game_states/InputTestState.hpp"
@@ -51,7 +64,22 @@ int main() {
     //-------------------
     // Create our window
     //-------------------
-    sf::RenderWindow *window = new sf::RenderWindow(sf::VideoMode(1152, 648), "ClarkSouls");
+    sf::RenderWindow *window;
+
+    try {
+        window = new sf::RenderWindow(sf::VideoMode(1152, 648), "ClarkSouls");
+        check_mem(window)
+    }
+    catch(const std::exception &e)
+    {
+        // TODO(clark): Handle this better. For now, kill code.
+        exit(1);
+    }
+    catch(const e_bad_allocation &e)
+    {
+        // TODO(clark): Handle
+        exit(1);
+    }
 
     // Set the Icon
     /*
@@ -65,10 +93,12 @@ int main() {
     //------------------------------
     // Initialize our Font Manager!
     //------------------------------
-    FontManager *fontManager = new FontManager();
+    FontManager *fontManager;
 
-    // Add fonts to the font manager!
     try {
+        fontManager = new FontManager();
+        check_mem(fontManager);
+
         fontManager->AddFont("sansation", new sf::Font);
 
         //TODO(clark): find a better way to do this. It looks kind of ugly and inefficient.
@@ -78,7 +108,6 @@ int main() {
 
     }
     catch (const manager_exception & e) {
-        DEBUG_ERROR(e.what());
 
         // TODO(clark): For now, let's just close the window. but handle later.
         window->close();
@@ -88,39 +117,63 @@ int main() {
     //------------------------------
     // Initialize our tex Manager!
     //------------------------------
-    TextureManager *textureManager = new TextureManager();
+    TextureManager *textureManager;
 
-    // Add textures to the texture Manager!
     try {
+        textureManager = new TextureManager();
+        check_mem(textureManager);
+        sf::Texture *temp;
+
         //---------------------------
         // Cute Bird!
-        //--------------------------
-        textureManager->AddTexture("cuteBird", new sf::Texture);
+        //---------------------------
+        temp = new sf::Texture();
+        check_mem(temp)
+        check(temp->loadFromFile("./src/assets/cute_bird.png"), e_manager_obj_cantload,
+              "Can't load texture cute_bird. Failed to open file.")
+        textureManager->AddTexture("cuteBird", temp);
 
-        //TODO(clark): find a better way to do this. It looks kind of ugly and inefficient.
-        if(!textureManager->GetTexture("cuteBird")->loadFromFile("./src/assets/cute_bird.png")) {
-            throw new e_manager_obj_cantload;
-        }
+        //---------------------------
+        // Player!
+        //---------------------------
+        temp = new sf::Texture();
+        check_mem(temp)
+        check(temp->loadFromFile("./src/assets/cute_bird.png"), e_manager_obj_cantload,
+              "Can't load texture player. Failed to open file")
+        textureManager->AddTexture("player", temp);
 
-        //
+        //---------------------------
+        // Error!
+        //---------------------------
+        temp = new sf::Texture();
+        check_mem(temp)
+        check(temp->loadFromFile("./src/assets/cute_bird.png"), e_manager_obj_cantload,
+              "Can't load texture: error. Failed to open file.")
+        textureManager->AddTexture("error", temp);
 
-        //
     }
-    catch (const manager_exception & e) {
-        DEBUG_ERROR(e.what());
+    catch (const manager_exception &e) {
 
         // TODO(clark): For now, let's just close the window. but handle later.
         window->close();
     }
+    catch (const e_bad_allocation &e)
+    {
+        //TODO(clark): handle
+        window->close();
+    }
+
 
     //------------------------------
     // Initialize our state system!
     //------------------------------
-    StateSystem* stateSystem = new StateSystem();
-
-    // Wow! Look at all these states!
+    StateSystem *stateSystem;
 
     try {
+        stateSystem = new StateSystem();
+        check_mem(stateSystem);
+
+        // Throws state system exceptions!
         stateSystem->AddState("charTest", new CharTestState(stateSystem, textureManager));
         stateSystem->AddState("testTest", new MainMenuState(stateSystem, textureManager));
         stateSystem->AddState("inputTest", new InputTestState(stateSystem, fontManager));
@@ -130,16 +183,19 @@ int main() {
         //-------------------------------------------------------------------
         stateSystem->PushState("inputTest");
     }
-    catch (const state_system_exception& e) {
-        DEBUG_ERROR(e.what());
+    catch (const state_system_exception &e) {
 
         // TODO(clark): For now, let's just close the window. but handle later.
         window->close();
     }
-    catch (const manager_exception & e) {
-        DEBUG_ERROR(e.what());
+    catch (const manager_exception &e) {
 
         //TODO(clark): Again, for now, just close the window.
+        window->close();
+    }
+    catch (const e_bad_allocation &e) {
+
+        //TODO(clark): Handle or break?
         window->close();
     }
 
@@ -223,9 +279,14 @@ int main() {
                 stateSystem->update(gameClock.restart().asSeconds(), input);
                 stateSystem->render(window);
             }
-            catch(const state_system_exception& e) {
-                DEBUG_ERROR(e.what());
+            catch(const state_system_exception &e) {
+                // TODO(clark): Handle these errors. For now, just close window.
                 window->close();
+            }
+            catch(const e_bad_allocation &e)
+            {
+                // TODO(clark): handle this or let it die?
+                exit(1);
             }
             // Update the window
             window->display();

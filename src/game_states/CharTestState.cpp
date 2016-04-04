@@ -17,12 +17,12 @@ CharTestState::CharTestState(StateSystem* system, TextureManager *texman) {
 
 
 void CharTestState::begin() {
-    DEBUG_STRING("CharTestState begin() \n");
+    log_info("CharTestState begin() \n");
 }
 
 
 void CharTestState::end() {
-    DEBUG_STRING("CharTestState end()\n");
+    log_info("CharTestState end()\n");
 }
 
 

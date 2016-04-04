@@ -19,12 +19,12 @@ InputTestState::InputTestState(StateSystem* system, FontManager *fontman) {
 
 
 void InputTestState::begin() {
-    DEBUG_STRING("InputTestState begin()\n");
+    log_info("InputTestState begin()\n");
 }
 
 
 void InputTestState::end() {
-    DEBUG_STRING("InputTestState end()\n");
+    log_info("InputTestState end()\n");
 }
 
 

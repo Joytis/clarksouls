@@ -21,11 +21,13 @@ add_executable (clarksouls ${clarksouls_SOURCES}
         src/game_states/StateIncludes.hpp
 
         src/exceptions/StateSystemExceptions.hpp
-        src/exceptions/ManagerExceptions.hpp)
+        src/exceptions/ManagerExceptions.hpp
+
+        src/dbg.hpp src/exceptions/BasicExceptions.hpp)
 
 
-
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+# Sets Optional Flag -DNDEBUG
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -DNDEBUG")
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")
 
