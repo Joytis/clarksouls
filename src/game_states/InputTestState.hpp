@@ -12,7 +12,7 @@ private:
     StateSystem *m_stateSystem;
     FontManager *m_fontManager;
 
-    sf::Text m_testTexts[60];
+    sf::Text m_testTexts[10];
 
     std::string getStringThing(game_button_state state);
 

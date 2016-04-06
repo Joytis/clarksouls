@@ -19,6 +19,7 @@
 #include <stack>
 #include <string>
 #include <thread>
+#include <tuple>
 #include <vector>
 
 #include "dbg.hpp"
@@ -35,6 +36,18 @@
 
 
 #define ARRAY_SIZE(array) (sizeof(array)/sizeof(array[0]))
+
+typedef struct
+{
+    union {
+        float veloc[3];
+        struct {
+            float velocity;
+            float verVelocity;
+            float horVelocity;
+        };
+    };
+} Velocity;
 
 
 

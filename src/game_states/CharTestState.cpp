@@ -11,8 +11,7 @@ CharTestState::CharTestState(StateSystem* system, TextureManager *texman) {
     m_textureManager = texman;
 
     // Get and dereference pointer to the texture.
-    tesprite.setTexture(*texman->GetTexture("cuteBird"));
-    tesprite.setPosition(425.0f, 170.0f);
+    player.SetTexture(texman,"cuteBird");
 }
 
 
@@ -32,7 +31,7 @@ void CharTestState::update(float deltaTime, Input *input) {
     //-------------------------------
     // Handle Input
     //-------------------------------
-    if (input->m_keyboardInput.Space.IsPressed){
+    if (input->States.HeavyAttack .IsPressed){
         m_stateSystem->PopState();
         m_stateSystem->PushState("inputTest");
     }
@@ -40,24 +39,13 @@ void CharTestState::update(float deltaTime, Input *input) {
     //-------------------------------
     // Update Logic Stuff
     //-------------------------------
-    // Update silly sprite!
-    if(input->m_keyboardInput.Up.IsDown){
-        tesprite.move(0.0f, -velocity);
-    }
-    if(input->m_keyboardInput.Down.IsDown){
-        tesprite.move(0.0f, velocity);
-    }
-    if(input->m_keyboardInput.Left.IsDown){
-        tesprite.move(-velocity, 0.0f);
-    }
-    if(input->m_keyboardInput.Right.IsDown){
-        tesprite.move(velocity, 0.0f);
-    }
+
+    player.update(deltaTime, input);
 }
 
 void CharTestState::render(sf::RenderWindow *window) {
     //Draw Sprite!
-    window->draw(tesprite);
+    window->draw(player.getM_sprite());
 }
 
 

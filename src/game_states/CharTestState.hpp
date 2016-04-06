@@ -6,6 +6,7 @@
 #define CLARKSOULS_CHARTESTSTATE_HPP
 
 #include "StateIncludes.hpp"
+#include "../Player.hpp"
 
 // This is just a silly little test state
 
@@ -14,7 +15,7 @@ private:
     StateSystem* m_stateSystem;
     TextureManager *m_textureManager;
 
-    sf::Sprite  tesprite;
+    Player player;
 public:
     CharTestState(StateSystem* system, TextureManager *texman);
 

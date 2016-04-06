@@ -7,21 +7,35 @@
 
 #include "Includes.hpp"
 
+// TODO(clark): pull these into a config file.
+#define PLAYER_SPEED 50.0f
+
+#define PLAYER_MAX_HEIGHT 548.0f
+#define PLAYER_MAX_WIDTH 1052.0f
+#define PLAYER_HOR_ACCEL 10.0f
+#define PLAYER_HOR_DECEL 15.0f
+#define PLAYER_VER_ACCEL 9.8f
+#define PLAYER_JUMP_VELOCITY -3.0f
+
 enum PlayerState {
-    IDLE, WALKING, RUNNING, JUMPING,
-    LIGHT_ATTACK, HEAVY_ATTACK
+    IDLE, WALKING, SLOWING, RUNNING,
+    JUMPING, LIGHT_ATTACK, HEAVY_ATTACK
 };
+
+
 
 class Player {
 private:
 
     int m_health;
-    int m_height;
-    int m_width;
+    float m_height;
+    float m_width;
 
     float m_speed;
-    float m_xpos;
-    float m_ypos;
+    float x;
+    float y;
+
+    Velocity m_velocity;
 
     sf::Sprite m_sprite;
 
@@ -29,11 +43,17 @@ private:
     PlayerState m_state;
 
 public:
-    //------------------------------------
+
+
+//------------------------------------
     // Getters and Setters
     //------------------------------------
     const PlayerState &getState() const {
         return m_state;
+    }
+
+    const sf::Sprite &getM_sprite() const {
+        return m_sprite;
     }
 
     int getHealth() const {
@@ -53,7 +73,6 @@ public:
     // Public Member Functions
     //------------------------------------
     Player();
-    ~Player();
 
     // Returns current health (m_health) of player
     int getHealth();
@@ -67,9 +86,13 @@ public:
     //      e_unhandled_state: The state in the player is unhandled.
     void HandleInput(Input *input);
 
-    void Move();
+    void move();
+    void jump();
+    void slow(float deltaTime);
+    void lightattack();
+    void heavyattack();
 
-    void update();
+    void update(float deltaTime, Input *input);
 
     void render();
 

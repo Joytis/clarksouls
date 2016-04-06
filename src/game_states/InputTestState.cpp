@@ -33,7 +33,7 @@ void InputTestState::update(float deltaTime, Input* input) {
     //-------------------------------
     // Handle Input
     //-------------------------------
-    if (input->m_keyboardInput.Space.IsPressed){
+    if (input->States.HeavyAttack.IsPressed){
         m_stateSystem->PopState();
         m_stateSystem->PushState("charTest");
     }
@@ -43,7 +43,7 @@ void InputTestState::update(float deltaTime, Input* input) {
     // Update Logic Stuff
     //-------------------------------
     for( int i = 0; i < ARRAY_SIZE(m_testTexts); i++ ){
-        m_testTexts[i].setString(getStringThing(input->m_keyboardInput.Buttons[i]));
+        m_testTexts[i].setString(getStringThing(input->States.Buttons[i]));
     }
 }
 
