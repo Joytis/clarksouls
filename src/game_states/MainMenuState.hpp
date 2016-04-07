@@ -20,13 +20,13 @@ private:
 public:
     MainMenuState(StateSystem* system, TextureManager *texman);
 
-    virtual void begin();
+    virtual void begin() override ;
 
-    virtual void end();
+    virtual void end() override ;
 
-    virtual void update(float deltaTime, Input *input);
+    virtual void update(float deltaTime, Input *input) override ;
 
-    virtual void render(sf::RenderWindow *window);
+    virtual void render(sf::RenderWindow *window) override ;
 };
 
 

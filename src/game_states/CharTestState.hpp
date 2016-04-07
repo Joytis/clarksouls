@@ -19,11 +19,11 @@ private:
 public:
     CharTestState(StateSystem* system, TextureManager *texman);
 
-    virtual void begin();
-    virtual void end();
+    virtual void begin() override ;
+    virtual void end() override ;
 
-    void update(float deltaTime, Input* input);
-    void render(sf::RenderWindow* window);
+    void update(float deltaTime, Input* input) override ;
+    void render(sf::RenderWindow* window) override ;
 };
 
 

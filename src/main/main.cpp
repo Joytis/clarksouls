@@ -58,6 +58,7 @@
 #include "../game_states/CharTestState.hpp"
 #include "../game_states/MainMenuState.hpp"
 #include "../game_states/InputTestState.hpp"
+#include "../game_states/Box2DTestState.hpp"
 
 int main() {
 
@@ -68,6 +69,7 @@ int main() {
 
     try {
         window = new sf::RenderWindow(sf::VideoMode(1152, 648), "ClarkSouls");
+        window->setFramerateLimit(60);
         check_mem(window)
     }
     catch(const std::exception &e)
@@ -174,9 +176,10 @@ int main() {
         check_mem(stateSystem);
 
         // Throws state system exceptions!
-        stateSystem->AddState("charTest", new CharTestState(stateSystem, textureManager));
+        stateSystem->AddState(GS_CHAR_TEST, new CharTestState(stateSystem, textureManager));
         stateSystem->AddState("testTest", new MainMenuState(stateSystem, textureManager));
-        stateSystem->AddState("inputTest", new InputTestState(stateSystem, fontManager));
+        stateSystem->AddState(GS_INPUT_TEST, new InputTestState(stateSystem, fontManager));
+        stateSystem->AddState(GS_B2_TEST, new Box2DTestState(stateSystem));
 
         //-------------------------------------------------------------------
         // Change this if you want to change the state the system starts in!

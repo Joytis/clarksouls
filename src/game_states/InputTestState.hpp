@@ -20,11 +20,11 @@ public:
 
     InputTestState(StateSystem* system, FontManager *fontman);
 
-    virtual void begin();
-    virtual void end();
+    virtual void begin() override ;
+    virtual void end() override ;
 
-    virtual void update(float deltaTime, Input* inupt);
-    virtual void render(sf::RenderWindow* window);
+    virtual void update(float deltaTime, Input* inupt) override ;
+    virtual void render(sf::RenderWindow* window) override ;
 };
 
 

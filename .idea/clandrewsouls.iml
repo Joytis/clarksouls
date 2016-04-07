@@ -14,12 +14,14 @@
       <sourceFolder url="file://$MODULE_DIR$/src/StateSystem.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/TextureManager.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/IState.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/game_states/Box2DTestState.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/game_states/MainMenuState.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/game_states/GameState.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/game_states/StateIncludes.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/game_states/InputTestState.hpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/game_states/CharTestState.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/game_states/MainMenuState.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/game_states/CharTestState.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/game_states/Box2DTestState.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/game_states/CharTestState.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/game_states/GameState.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/game_states/InputTestState.cpp" isTestSource="false" />
@@ -196,6 +198,7 @@
           <root url="file:///System/Library/Frameworks/Kernel.framework/Headers" />
           <root url="file:///System/Library/Frameworks/Automator.framework/Headers" />
           <root url="file:///usr/include" />
+          <root url="file:///usr/local/lib" />
           <root url="file:///usr/local/include" />
           <root url="file:///Library/Frameworks/iTunesLibrary.framework/Headers" />
           <root url="file:///Library/Frameworks/SFML.framework/Headers" />
@@ -363,6 +366,7 @@
           <root url="file:///System/Library/Frameworks/Kernel.framework/Headers" />
           <root url="file:///System/Library/Frameworks/Automator.framework/Headers" />
           <root url="file:///usr/include" />
+          <root url="file:///usr/local/lib" />
           <root url="file:///usr/local/include" />
           <root url="file:///Library/Frameworks/iTunesLibrary.framework/Headers" />
           <root url="file:///Library/Frameworks/SFML.framework/Headers" />

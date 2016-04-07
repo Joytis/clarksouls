@@ -5,11 +5,15 @@
 #ifndef CLANDREWSOULS_INCLUDES_HPP
 #define CLANDREWSOULS_INCLUDES_HPP
 
+// SFML BOIS
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
+
+// BOX2D BOIS
+#include <Box2D/Box2D.h>
 
 #include <exception>
 #include <iostream>
@@ -34,8 +38,19 @@
 #include "exceptions/StateSystemExceptions.hpp"
 #include "exceptions/ManagerExceptions.hpp"
 
+// CONSTANTS
+#define CLSB2_TIME_STEP (1.0f / 60.0f)
+#define CLSB2_VELOCITY_ITTERATIONS 8
+#define CLSB2_POSITION_ITTERATIONS 2
+
+// Game State IDs
+#define GS_INPUT_TEST "inputTest"
+#define GS_CHAR_TEST "charTest"
+#define GS_B2_TEST "b2Test"
+
 
 #define ARRAY_SIZE(array) (sizeof(array)/sizeof(array[0]))
+
 
 typedef struct
 {

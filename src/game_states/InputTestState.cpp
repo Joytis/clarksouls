@@ -35,7 +35,11 @@ void InputTestState::update(float deltaTime, Input* input) {
     //-------------------------------
     if (input->States.HeavyAttack.IsPressed){
         m_stateSystem->PopState();
-        m_stateSystem->PushState("charTest");
+        m_stateSystem->PushState(GS_CHAR_TEST);
+    }
+    if (input->States.LightAttack.IsPressed) {
+        m_stateSystem->PopState();
+        m_stateSystem->PushState(GS_B2_TEST);
     }
 
 
