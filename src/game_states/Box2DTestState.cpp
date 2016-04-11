@@ -72,7 +72,7 @@ void Box2DTestState::update(float deltaTime, Input *input)
     // Inputs!
     if (input->States.LightAttack.IsPressed){
         m_stateSystem->PopState();
-        m_stateSystem->PushState(GS_CHAR_TEST);
+        m_stateSystem->PushState(GS_INPUT_TEST);
     }
 }
 void Box2DTestState::render(sf::RenderWindow *window)
