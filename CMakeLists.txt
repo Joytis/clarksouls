@@ -12,7 +12,6 @@ file(GLOB_RECURSE clarksouls_HEADERS "src/*.h")
 if(UNIX)
     set (Box2D_SOURCE_DIR "/usr/local/lib")
 elseif(WIN32)
-    set (${SFML_INCLUDE_DIR} "C:/mingw32/include")
     set (Box2D_SOURCE_DIR "C:/mingw32/lib")
 endif()
 
@@ -20,6 +19,7 @@ endif()
 # Directories for libraries
 #=======================================================================
 set(${SFML_ROOT} "C:/mingw32/lib")
+set (${SFML_INCLUDE_DIR} "C:/mingw32/include")
 
 
 #
